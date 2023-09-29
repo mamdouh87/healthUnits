@@ -1,0 +1,61 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002803",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "doctors_unit",
+  "fields": [
+    {
+      "fieldName": "dayValue",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "shiftType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "activeWeek",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "donePass",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "passDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "unitPassed",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "passBlocked",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "justView",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DoctorsUnit",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "doctors",
+      "otherEntityRelationshipName": "doctorsUnit",
+      "relationshipName": "doctor",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "units",
+      "otherEntityRelationshipName": "doctorsUnit",
+      "relationshipName": "unit",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

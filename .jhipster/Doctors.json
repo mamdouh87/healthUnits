@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002802",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "doctors",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "perferedDay",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "doubleShift",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "shiftType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "perferedUnit",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Doctors",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "doctorsUnit",
+      "otherEntityRelationshipName": "doctor",
+      "relationshipName": "doctorsUnit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "extraPassUnit",
+      "otherEntityRelationshipName": "doctor",
+      "relationshipName": "extraPassUnit",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

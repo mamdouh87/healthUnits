@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002806",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "week_day_date",
+  "fields": [
+    {
+      "fieldName": "dayValue",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dayName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dayDate",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "WeekDayDate",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceClass"
+}

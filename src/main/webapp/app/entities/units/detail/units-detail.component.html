@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="units">
+      <h2 data-cy="unitsDetailsHeading"><span jhiTranslate="healthUnitApp.units.detail.title">Units</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ units.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.units.name">Name</span></dt>
+        <dd>
+          <span>{{ units.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.units.priority">Priority</span></dt>
+        <dd>
+          <span>{{ units.priority }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.units.doctorsUnit">Doctors Unit</span></dt>
+        <dd>
+          <div *ngIf="units.doctorsUnit">
+            <a [routerLink]="['/doctors-unit', units.doctorsUnit.id, 'view']">{{ units.doctorsUnit.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.units.extraPassUnit">Extra Pass Unit</span></dt>
+        <dd>
+          <div *ngIf="units.extraPassUnit">
+            <a [routerLink]="['/extra-pass-unit', units.extraPassUnit.id, 'view']">{{ units.extraPassUnit.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/units', units.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

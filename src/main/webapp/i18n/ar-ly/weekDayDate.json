@@ -1,0 +1,26 @@
+{
+  "healthUnitApp": {
+    "weekDayDate": {
+      "home": {
+        "title": "Week Day Dates",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Week Day Date",
+        "createOrEditLabel": "Create or edit a Week Day Date",
+        "notFound": "No Week Day Dates found"
+      },
+      "created": "A new Week Day Date is created with identifier {{ param }}",
+      "updated": "A Week Day Date is updated with identifier {{ param }}",
+      "deleted": "A Week Day Date is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Week Day Date {{ id }}?"
+      },
+      "detail": {
+        "title": "Week Day Date"
+      },
+      "id": "ID",
+      "dayValue": "Day Value",
+      "dayName": "Day Name",
+      "dayDate": "Day Date"
+    }
+  }
+}

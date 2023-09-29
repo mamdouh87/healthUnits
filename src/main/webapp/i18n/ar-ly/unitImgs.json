@@ -1,0 +1,26 @@
+{
+  "healthUnitApp": {
+    "unitImgs": {
+      "home": {
+        "title": "Unit Imgs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Unit Imgs",
+        "createOrEditLabel": "Create or edit a Unit Imgs",
+        "notFound": "No Unit Imgs found"
+      },
+      "created": "A new Unit Imgs is created with identifier {{ param }}",
+      "updated": "A Unit Imgs is updated with identifier {{ param }}",
+      "deleted": "A Unit Imgs is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Unit Imgs {{ id }}?"
+      },
+      "detail": {
+        "title": "Unit Imgs"
+      },
+      "id": "ID",
+      "fileDescription": "File Description",
+      "img": "Img",
+      "unit": "Unit"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="doctorsUnit">
+      <h2 data-cy="doctorsUnitDetailsHeading"><span jhiTranslate="healthUnitApp.doctorsUnit.detail.title">Doctors Unit</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.dayValue">Day Value</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.dayValue }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.shiftType">Shift Type</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.shiftType }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.activeWeek">Active Week</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.activeWeek }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.donePass">Done Pass</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.donePass }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.passDate">Pass Date</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.passDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.unitPassed">Unit Passed</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.unitPassed }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.passBlocked">Pass Blocked</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.passBlocked }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorsUnit.justView">Just View</span></dt>
+        <dd>
+          <span>{{ doctorsUnit.justView }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/doctors-unit', doctorsUnit.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

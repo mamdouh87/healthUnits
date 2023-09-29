@@ -1,0 +1,125 @@
+<div>
+  <h2 id="page-heading" data-cy="UnitsHeading">
+    <span jhiTranslate="healthUnitApp.units.home.title">Units</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="healthUnitApp.units.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-units"
+        [routerLink]="['/units/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="healthUnitApp.units.home.createLabel"> Create a new Units </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="units?.length === 0">
+    <span jhiTranslate="healthUnitApp.units.home.notFound">No Units found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="units && units.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.units.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="priority">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.units.priority">Priority</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="doctorsUnit.id">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.units.doctorsUnit">Doctors Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="extraPassUnit.id">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.units.extraPassUnit">Extra Pass Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let units of units; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/units', units.id, 'view']">{{ units.id }}</a>
+          </td>
+          <td>{{ units.name }}</td>
+          <td>{{ units.priority }}</td>
+          <td>
+            <div *ngIf="units.doctorsUnit">
+              <a [routerLink]="['/doctors-unit', units.doctorsUnit.id, 'view']">{{ units.doctorsUnit.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="units.extraPassUnit">
+              <a [routerLink]="['/extra-pass-unit', units.extraPassUnit.id, 'view']">{{ units.extraPassUnit.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/units', units.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">عرض</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/units', units.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(units)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="units && units.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,31 @@
+{
+  "healthUnitApp": {
+    "extraPassUnit": {
+      "home": {
+        "title": "Extra Pass Units",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Extra Pass Unit",
+        "createOrEditLabel": "Create or edit a Extra Pass Unit",
+        "notFound": "No Extra Pass Units found"
+      },
+      "created": "A new Extra Pass Unit is created with identifier {{ param }}",
+      "updated": "A Extra Pass Unit is updated with identifier {{ param }}",
+      "deleted": "A Extra Pass Unit is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Extra Pass Unit {{ id }}?"
+      },
+      "detail": {
+        "title": "Extra Pass Unit"
+      },
+      "id": "ID",
+      "dayValue": "Day Value",
+      "shiftType": "Shift Type",
+      "activeWeek": "Active Week",
+      "donePass": "Done Pass",
+      "passDate": "Pass Date",
+      "unitPassed": "Unit Passed",
+      "doctor": "Doctor",
+      "unit": "Unit"
+    }
+  }
+}

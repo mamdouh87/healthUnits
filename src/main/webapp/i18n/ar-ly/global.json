@@ -7,6 +7,14 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "الكيانات",
+        "units": "Units",
+        "doctors": "Doctors",
+        "doctorsUnit": "Doctors Unit",
+        "extraPassUnit": "Extra Pass Unit",
+        "unitImgs": "Unit Imgs",
+        "weekDayDate": "Week Day Date",
+        "doctorPassImgs": "Doctor Pass Imgs",
+        "notifications": "Notifications",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

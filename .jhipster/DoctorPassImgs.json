@@ -1,0 +1,38 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002807",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "doctor_pass_imgs",
+  "fields": [
+    {
+      "fieldName": "dayValue",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "img",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "DoctorPassImgs",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "units",
+      "ownerSide": true,
+      "relationshipName": "unit",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "doctors",
+      "ownerSide": true,
+      "relationshipName": "doctor",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

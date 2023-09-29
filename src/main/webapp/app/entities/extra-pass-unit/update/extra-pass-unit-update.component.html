@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-extra-pass-unit-heading"
+        data-cy="ExtraPassUnitCreateUpdateHeading"
+        jhiTranslate="healthUnitApp.extraPassUnit.home.createOrEditLabel"
+      >
+        Create or edit a Extra Pass Unit
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.extraPassUnit.dayValue" for="field_dayValue">Day Value</label>
+          <input type="number" class="form-control" name="dayValue" id="field_dayValue" data-cy="dayValue" formControlName="dayValue" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.extraPassUnit.shiftType" for="field_shiftType">Shift Type</label>
+          <input type="number" class="form-control" name="shiftType" id="field_shiftType" data-cy="shiftType" formControlName="shiftType" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.extraPassUnit.activeWeek" for="field_activeWeek">Active Week</label>
+          <input
+            type="number"
+            class="form-control"
+            name="activeWeek"
+            id="field_activeWeek"
+            data-cy="activeWeek"
+            formControlName="activeWeek"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.extraPassUnit.donePass" for="field_donePass">Done Pass</label>
+          <input type="number" class="form-control" name="donePass" id="field_donePass" data-cy="donePass" formControlName="donePass" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.extraPassUnit.passDate" for="field_passDate">Pass Date</label>
+          <div class="d-flex">
+            <input
+              id="field_passDate"
+              data-cy="passDate"
+              type="datetime-local"
+              class="form-control"
+              name="passDate"
+              formControlName="passDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.extraPassUnit.unitPassed" for="field_unitPassed">Unit Passed</label>
+          <input
+            type="number"
+            class="form-control"
+            name="unitPassed"
+            id="field_unitPassed"
+            data-cy="unitPassed"
+            formControlName="unitPassed"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -31,7 +31,7 @@ entity ExtraPassUnit{
 }
 entity UnitImgs{
 	fileDescription String,
-    img Clob
+    img Blob
 }
 
 entity WeekDayDate{
@@ -41,7 +41,7 @@ entity WeekDayDate{
 }
 entity DoctorPassImgs{
 	dayValue Integer,
-    img Clob
+    img Blob
 }
 entity Notifications{
 	title String,

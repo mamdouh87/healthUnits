@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002805",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "unit_imgs",
+  "fields": [
+    {
+      "fieldName": "fileDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "img",
+      "fieldType": "byte[]",
+      "fieldTypeBlobContent": "any"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "UnitImgs",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "units",
+      "ownerSide": true,
+      "relationshipName": "unit",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

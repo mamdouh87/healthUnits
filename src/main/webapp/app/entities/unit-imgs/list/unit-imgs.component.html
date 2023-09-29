@@ -1,0 +1,127 @@
+<div>
+  <h2 id="page-heading" data-cy="UnitImgsHeading">
+    <span jhiTranslate="healthUnitApp.unitImgs.home.title">Unit Imgs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="healthUnitApp.unitImgs.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-unit-imgs"
+        [routerLink]="['/unit-imgs/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="healthUnitApp.unitImgs.home.createLabel"> Create a new Unit Imgs </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="unitImgs?.length === 0">
+    <span jhiTranslate="healthUnitApp.unitImgs.home.notFound">No Unit Imgs found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="unitImgs && unitImgs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fileDescription">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.unitImgs.fileDescription">File Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="img">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.unitImgs.img">Img</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="unit.id">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.unitImgs.unit">Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let unitImgs of unitImgs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/unit-imgs', unitImgs.id, 'view']">{{ unitImgs.id }}</a>
+          </td>
+          <td>{{ unitImgs.fileDescription }}</td>
+          <td>
+            <a *ngIf="unitImgs.img" (click)="openFile(unitImgs.img, unitImgs.imgContentType)" jhiTranslate="entity.action.open">فتح</a>
+            <span *ngIf="unitImgs.img">{{ unitImgs.imgContentType }}, {{ byteSize(unitImgs.img) }}</span>
+          </td>
+          <td>
+            <div *ngIf="unitImgs.unit">
+              <a [routerLink]="['/units', unitImgs.unit.id, 'view']">{{ unitImgs.unit.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/unit-imgs', unitImgs.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">عرض</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/unit-imgs', unitImgs.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(unitImgs)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="unitImgs && unitImgs.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

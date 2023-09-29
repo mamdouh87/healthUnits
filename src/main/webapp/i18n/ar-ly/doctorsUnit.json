@@ -1,0 +1,33 @@
+{
+  "healthUnitApp": {
+    "doctorsUnit": {
+      "home": {
+        "title": "Doctors Units",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Doctors Unit",
+        "createOrEditLabel": "Create or edit a Doctors Unit",
+        "notFound": "No Doctors Units found"
+      },
+      "created": "A new Doctors Unit is created with identifier {{ param }}",
+      "updated": "A Doctors Unit is updated with identifier {{ param }}",
+      "deleted": "A Doctors Unit is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Doctors Unit {{ id }}?"
+      },
+      "detail": {
+        "title": "Doctors Unit"
+      },
+      "id": "ID",
+      "dayValue": "Day Value",
+      "shiftType": "Shift Type",
+      "activeWeek": "Active Week",
+      "donePass": "Done Pass",
+      "passDate": "Pass Date",
+      "unitPassed": "Unit Passed",
+      "passBlocked": "Pass Blocked",
+      "justView": "Just View",
+      "doctor": "Doctor",
+      "unit": "Unit"
+    }
+  }
+}

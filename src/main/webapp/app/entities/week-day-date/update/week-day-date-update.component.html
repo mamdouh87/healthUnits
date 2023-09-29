@@ -1,0 +1,53 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-week-day-date-heading"
+        data-cy="WeekDayDateCreateUpdateHeading"
+        jhiTranslate="healthUnitApp.weekDayDate.home.createOrEditLabel"
+      >
+        Create or edit a Week Day Date
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.weekDayDate.dayValue" for="field_dayValue">Day Value</label>
+          <input type="number" class="form-control" name="dayValue" id="field_dayValue" data-cy="dayValue" formControlName="dayValue" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.weekDayDate.dayName" for="field_dayName">Day Name</label>
+          <input type="text" class="form-control" name="dayName" id="field_dayName" data-cy="dayName" formControlName="dayName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.weekDayDate.dayDate" for="field_dayDate">Day Date</label>
+          <input type="text" class="form-control" name="dayDate" id="field_dayDate" data-cy="dayDate" formControlName="dayDate" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

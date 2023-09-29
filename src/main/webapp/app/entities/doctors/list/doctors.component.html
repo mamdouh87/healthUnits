@@ -1,0 +1,156 @@
+<div>
+  <h2 id="page-heading" data-cy="DoctorsHeading">
+    <span jhiTranslate="healthUnitApp.doctors.home.title">Doctors</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="healthUnitApp.doctors.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-doctors"
+        [routerLink]="['/doctors/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="healthUnitApp.doctors.home.createLabel"> Create a new Doctors </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="doctors?.length === 0">
+    <span jhiTranslate="healthUnitApp.doctors.home.notFound">No Doctors found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="doctors && doctors.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="name">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctors.name">Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="perferedDay">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctors.perferedDay">Perfered Day</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="doubleShift">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctors.doubleShift">Double Shift</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="shiftType">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctors.shiftType">Shift Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="perferedUnit">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctors.perferedUnit">Perfered Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="doctorsUnit.id">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctors.doctorsUnit">Doctors Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="extraPassUnit.id">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctors.extraPassUnit">Extra Pass Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctors of doctors; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/doctors', doctors.id, 'view']">{{ doctors.id }}</a>
+          </td>
+          <td>{{ doctors.name }}</td>
+          <td>{{ doctors.perferedDay }}</td>
+          <td>{{ doctors.doubleShift }}</td>
+          <td>{{ doctors.shiftType }}</td>
+          <td>{{ doctors.perferedUnit }}</td>
+          <td>
+            <div *ngIf="doctors.doctorsUnit">
+              <a [routerLink]="['/doctors-unit', doctors.doctorsUnit.id, 'view']">{{ doctors.doctorsUnit.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="doctors.extraPassUnit">
+              <a [routerLink]="['/extra-pass-unit', doctors.extraPassUnit.id, 'view']">{{ doctors.extraPassUnit.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/doctors', doctors.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">عرض</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/doctors', doctors.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(doctors)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="doctors && doctors.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002808",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "notifications",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "message",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "dayValue",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Notifications",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "units",
+      "ownerSide": true,
+      "relationshipName": "unit",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

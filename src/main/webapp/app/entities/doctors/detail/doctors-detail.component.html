@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="doctors">
+      <h2 data-cy="doctorsDetailsHeading"><span jhiTranslate="healthUnitApp.doctors.detail.title">Doctors</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ doctors.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctors.name">Name</span></dt>
+        <dd>
+          <span>{{ doctors.name }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctors.perferedDay">Perfered Day</span></dt>
+        <dd>
+          <span>{{ doctors.perferedDay }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctors.doubleShift">Double Shift</span></dt>
+        <dd>
+          <span>{{ doctors.doubleShift }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctors.shiftType">Shift Type</span></dt>
+        <dd>
+          <span>{{ doctors.shiftType }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctors.perferedUnit">Perfered Unit</span></dt>
+        <dd>
+          <span>{{ doctors.perferedUnit }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctors.doctorsUnit">Doctors Unit</span></dt>
+        <dd>
+          <div *ngIf="doctors.doctorsUnit">
+            <a [routerLink]="['/doctors-unit', doctors.doctorsUnit.id, 'view']">{{ doctors.doctorsUnit.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctors.extraPassUnit">Extra Pass Unit</span></dt>
+        <dd>
+          <div *ngIf="doctors.extraPassUnit">
+            <a [routerLink]="['/extra-pass-unit', doctors.extraPassUnit.id, 'view']">{{ doctors.extraPassUnit.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/doctors', doctors.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

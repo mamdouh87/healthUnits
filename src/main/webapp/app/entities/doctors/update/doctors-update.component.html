@@ -1,0 +1,114 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-doctors-heading" data-cy="DoctorsCreateUpdateHeading" jhiTranslate="healthUnitApp.doctors.home.createOrEditLabel">
+        Create or edit a Doctors
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.doctors.name" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.doctors.perferedDay" for="field_perferedDay">Perfered Day</label>
+          <input
+            type="text"
+            class="form-control"
+            name="perferedDay"
+            id="field_perferedDay"
+            data-cy="perferedDay"
+            formControlName="perferedDay"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.doctors.doubleShift" for="field_doubleShift">Double Shift</label>
+          <input
+            type="number"
+            class="form-control"
+            name="doubleShift"
+            id="field_doubleShift"
+            data-cy="doubleShift"
+            formControlName="doubleShift"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.doctors.shiftType" for="field_shiftType">Shift Type</label>
+          <input type="text" class="form-control" name="shiftType" id="field_shiftType" data-cy="shiftType" formControlName="shiftType" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.doctors.perferedUnit" for="field_perferedUnit">Perfered Unit</label>
+          <input
+            type="text"
+            class="form-control"
+            name="perferedUnit"
+            id="field_perferedUnit"
+            data-cy="perferedUnit"
+            formControlName="perferedUnit"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.doctors.doctorsUnit" for="field_doctorsUnit">Doctors Unit</label>
+          <select
+            class="form-control"
+            id="field_doctorsUnit"
+            data-cy="doctorsUnit"
+            name="doctorsUnit"
+            formControlName="doctorsUnit"
+            [compareWith]="compareDoctorsUnit"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="doctorsUnitOption" *ngFor="let doctorsUnitOption of doctorsUnitsSharedCollection">
+              {{ doctorsUnitOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.doctors.extraPassUnit" for="field_extraPassUnit">Extra Pass Unit</label>
+          <select
+            class="form-control"
+            id="field_extraPassUnit"
+            data-cy="extraPassUnit"
+            name="extraPassUnit"
+            formControlName="extraPassUnit"
+            [compareWith]="compareExtraPassUnit"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="extraPassUnitOption" *ngFor="let extraPassUnitOption of extraPassUnitsSharedCollection">
+              {{ extraPassUnitOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

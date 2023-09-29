@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-notifications-heading"
+        data-cy="NotificationsCreateUpdateHeading"
+        jhiTranslate="healthUnitApp.notifications.home.createOrEditLabel"
+      >
+        Create or edit a Notifications
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.notifications.title" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.notifications.message" for="field_message">Message</label>
+          <input type="text" class="form-control" name="message" id="field_message" data-cy="message" formControlName="message" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.notifications.status" for="field_status">Status</label>
+          <input type="number" class="form-control" name="status" id="field_status" data-cy="status" formControlName="status" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.notifications.dayValue" for="field_dayValue">Day Value</label>
+          <input type="number" class="form-control" name="dayValue" id="field_dayValue" data-cy="dayValue" formControlName="dayValue" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.notifications.unit" for="field_unit">Unit</label>
+          <select class="form-control" id="field_unit" data-cy="unit" name="unit" formControlName="unit" [compareWith]="compareUnits">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="unitsOption" *ngFor="let unitsOption of unitsSharedCollection">{{ unitsOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

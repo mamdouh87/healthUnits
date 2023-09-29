@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="notifications">
+      <h2 data-cy="notificationsDetailsHeading"><span jhiTranslate="healthUnitApp.notifications.detail.title">Notifications</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ notifications.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.notifications.title">Title</span></dt>
+        <dd>
+          <span>{{ notifications.title }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.notifications.message">Message</span></dt>
+        <dd>
+          <span>{{ notifications.message }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.notifications.status">Status</span></dt>
+        <dd>
+          <span>{{ notifications.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.notifications.dayValue">Day Value</span></dt>
+        <dd>
+          <span>{{ notifications.dayValue }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.notifications.unit">Unit</span></dt>
+        <dd>
+          <div *ngIf="notifications.unit">
+            <a [routerLink]="['/units', notifications.unit.id, 'view']">{{ notifications.unit.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/notifications', notifications.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

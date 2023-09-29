@@ -1,0 +1,27 @@
+{
+  "healthUnitApp": {
+    "doctorPassImgs": {
+      "home": {
+        "title": "Doctor Pass Imgs",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Doctor Pass Imgs",
+        "createOrEditLabel": "Create or edit a Doctor Pass Imgs",
+        "notFound": "No Doctor Pass Imgs found"
+      },
+      "created": "A new Doctor Pass Imgs is created with identifier {{ param }}",
+      "updated": "A Doctor Pass Imgs is updated with identifier {{ param }}",
+      "deleted": "A Doctor Pass Imgs is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Doctor Pass Imgs {{ id }}?"
+      },
+      "detail": {
+        "title": "Doctor Pass Imgs"
+      },
+      "id": "ID",
+      "dayValue": "Day Value",
+      "img": "Img",
+      "unit": "Unit",
+      "doctor": "Doctor"
+    }
+  }
+}

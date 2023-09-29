@@ -1,0 +1,87 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-unit-imgs-heading" data-cy="UnitImgsCreateUpdateHeading" jhiTranslate="healthUnitApp.unitImgs.home.createOrEditLabel">
+        Create or edit a Unit Imgs
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.unitImgs.fileDescription" for="field_fileDescription"
+            >File Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="fileDescription"
+            id="field_fileDescription"
+            data-cy="fileDescription"
+            formControlName="fileDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.unitImgs.img" for="field_img">Img</label>
+          <div>
+            <div *ngIf="editForm.get('img')!.value" class="form-text text-danger clearfix">
+              <a
+                class="pull-start"
+                (click)="openFile(editForm.get('img')!.value!, editForm.get('imgContentType')!.value!)"
+                jhiTranslate="entity.action.open"
+                >فتح</a
+              ><br />
+              <span class="pull-start">{{ editForm.get('imgContentType')!.value }}, {{ byteSize(editForm.get('img')!.value!) }}</span>
+              <button
+                type="button"
+                (click)="editForm.patchValue({ img: undefined, imgContentType: undefined })"
+                class="btn btn-secondary btn-xs pull-end"
+              >
+                <fa-icon icon="times"></fa-icon>
+              </button>
+            </div>
+            <input
+              type="file"
+              id="file_img"
+              data-cy="img"
+              (change)="setFileData($event, 'img', false)"
+              jhiTranslate="entity.action.addblob"
+            />
+          </div>
+          <input type="hidden" class="form-control" name="img" id="field_img" data-cy="img" formControlName="img" />
+          <input type="hidden" class="form-control" name="imgContentType" id="field_imgContentType" formControlName="imgContentType" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="healthUnitApp.unitImgs.unit" for="field_unit">Unit</label>
+          <select class="form-control" id="field_unit" data-cy="unit" name="unit" formControlName="unit" [compareWith]="compareUnits">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="unitsOption" *ngFor="let unitsOption of unitsSharedCollection">{{ unitsOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">الغاء</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">حفظ</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

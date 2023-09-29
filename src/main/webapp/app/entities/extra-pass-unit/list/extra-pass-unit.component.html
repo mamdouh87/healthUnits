@@ -1,0 +1,141 @@
+<div>
+  <h2 id="page-heading" data-cy="ExtraPassUnitHeading">
+    <span jhiTranslate="healthUnitApp.extraPassUnit.home.title">Extra Pass Units</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="healthUnitApp.extraPassUnit.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-extra-pass-unit"
+        [routerLink]="['/extra-pass-unit/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="healthUnitApp.extraPassUnit.home.createLabel"> Create a new Extra Pass Unit </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="extraPassUnits?.length === 0">
+    <span jhiTranslate="healthUnitApp.extraPassUnit.home.notFound">No Extra Pass Units found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="extraPassUnits && extraPassUnits.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dayValue">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.extraPassUnit.dayValue">Day Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="shiftType">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.extraPassUnit.shiftType">Shift Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="activeWeek">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.extraPassUnit.activeWeek">Active Week</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="donePass">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.extraPassUnit.donePass">Done Pass</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="passDate">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.extraPassUnit.passDate">Pass Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="unitPassed">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.extraPassUnit.unitPassed">Unit Passed</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let extraPassUnit of extraPassUnits; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/extra-pass-unit', extraPassUnit.id, 'view']">{{ extraPassUnit.id }}</a>
+          </td>
+          <td>{{ extraPassUnit.dayValue }}</td>
+          <td>{{ extraPassUnit.shiftType }}</td>
+          <td>{{ extraPassUnit.activeWeek }}</td>
+          <td>{{ extraPassUnit.donePass }}</td>
+          <td>{{ extraPassUnit.passDate | formatMediumDatetime }}</td>
+          <td>{{ extraPassUnit.unitPassed }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/extra-pass-unit', extraPassUnit.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">عرض</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/extra-pass-unit', extraPassUnit.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(extraPassUnit)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="extraPassUnits && extraPassUnits.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

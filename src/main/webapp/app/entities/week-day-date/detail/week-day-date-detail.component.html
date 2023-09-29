@@ -1,0 +1,40 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="weekDayDate">
+      <h2 data-cy="weekDayDateDetailsHeading"><span jhiTranslate="healthUnitApp.weekDayDate.detail.title">Week Day Date</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ weekDayDate.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.weekDayDate.dayValue">Day Value</span></dt>
+        <dd>
+          <span>{{ weekDayDate.dayValue }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.weekDayDate.dayName">Day Name</span></dt>
+        <dd>
+          <span>{{ weekDayDate.dayName }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.weekDayDate.dayDate">Day Date</span></dt>
+        <dd>
+          <span>{{ weekDayDate.dayDate }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/week-day-date', weekDayDate.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>

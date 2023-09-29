@@ -1,0 +1,53 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002804",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "extra_pass_unit",
+  "fields": [
+    {
+      "fieldName": "dayValue",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "shiftType",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "activeWeek",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "donePass",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "passDate",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "unitPassed",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ExtraPassUnit",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "doctors",
+      "otherEntityRelationshipName": "extraPassUnit",
+      "relationshipName": "doctor",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "units",
+      "otherEntityRelationshipName": "extraPassUnit",
+      "relationshipName": "unit",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceClass"
+}

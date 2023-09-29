@@ -1,0 +1,143 @@
+<div>
+  <h2 id="page-heading" data-cy="DoctorPassImgsHeading">
+    <span jhiTranslate="healthUnitApp.doctorPassImgs.home.title">Doctor Pass Imgs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="healthUnitApp.doctorPassImgs.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-doctor-pass-imgs"
+        [routerLink]="['/doctor-pass-imgs/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="healthUnitApp.doctorPassImgs.home.createLabel"> Create a new Doctor Pass Imgs </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="doctorPassImgs?.length === 0">
+    <span jhiTranslate="healthUnitApp.doctorPassImgs.home.notFound">No Doctor Pass Imgs found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="doctorPassImgs && doctorPassImgs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dayValue">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctorPassImgs.dayValue">Day Value</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="img">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctorPassImgs.img">Img</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="unit.id">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctorPassImgs.unit">Unit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="doctor.id">
+            <div class="d-flex">
+              <span jhiTranslate="healthUnitApp.doctorPassImgs.doctor">Doctor</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doctorPassImgs of doctorPassImgs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/doctor-pass-imgs', doctorPassImgs.id, 'view']">{{ doctorPassImgs.id }}</a>
+          </td>
+          <td>{{ doctorPassImgs.dayValue }}</td>
+          <td>
+            <a
+              *ngIf="doctorPassImgs.img"
+              (click)="openFile(doctorPassImgs.img, doctorPassImgs.imgContentType)"
+              jhiTranslate="entity.action.open"
+              >فتح</a
+            >
+            <span *ngIf="doctorPassImgs.img">{{ doctorPassImgs.imgContentType }}, {{ byteSize(doctorPassImgs.img) }}</span>
+          </td>
+          <td>
+            <div *ngIf="doctorPassImgs.unit">
+              <a [routerLink]="['/units', doctorPassImgs.unit.id, 'view']">{{ doctorPassImgs.unit.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="doctorPassImgs.doctor">
+              <a [routerLink]="['/doctors', doctorPassImgs.doctor.id, 'view']">{{ doctorPassImgs.doctor.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/doctor-pass-imgs', doctorPassImgs.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">عرض</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/doctor-pass-imgs', doctorPassImgs.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">تعديل</span>
+              </button>
+
+              <button type="submit" (click)="delete(doctorPassImgs)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">حذف</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="doctorPassImgs && doctorPassImgs.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [page]="page"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="navigateToPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

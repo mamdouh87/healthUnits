@@ -1,0 +1,37 @@
+{
+  "applications": "*",
+  "changelogDate": "20230929002801",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "units",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "priority",
+      "fieldType": "Integer"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Units",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "doctorsUnit",
+      "otherEntityRelationshipName": "unit",
+      "relationshipName": "doctorsUnit",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "extraPassUnit",
+      "otherEntityRelationshipName": "unit",
+      "relationshipName": "extraPassUnit",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceClass"
+}

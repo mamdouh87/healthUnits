@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="doctorPassImgs">
+      <h2 data-cy="doctorPassImgsDetailsHeading"><span jhiTranslate="healthUnitApp.doctorPassImgs.detail.title">Doctor Pass Imgs</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ doctorPassImgs.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorPassImgs.dayValue">Day Value</span></dt>
+        <dd>
+          <span>{{ doctorPassImgs.dayValue }}</span>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorPassImgs.img">Img</span></dt>
+        <dd>
+          <div *ngIf="doctorPassImgs.img">
+            <a (click)="openFile(doctorPassImgs.img, doctorPassImgs.imgContentType)" jhiTranslate="entity.action.open">فتح</a>
+            {{ doctorPassImgs.imgContentType }}, {{ byteSize(doctorPassImgs.img) }}
+          </div>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorPassImgs.unit">Unit</span></dt>
+        <dd>
+          <div *ngIf="doctorPassImgs.unit">
+            <a [routerLink]="['/units', doctorPassImgs.unit.id, 'view']">{{ doctorPassImgs.unit.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="healthUnitApp.doctorPassImgs.doctor">Doctor</span></dt>
+        <dd>
+          <div *ngIf="doctorPassImgs.doctor">
+            <a [routerLink]="['/doctors', doctorPassImgs.doctor.id, 'view']">{{ doctorPassImgs.doctor.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">رجوع</span>
+      </button>
+
+      <button type="button" [routerLink]="['/doctor-pass-imgs', doctorPassImgs.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">تعديل</span>
+      </button>
+    </div>
+  </div>
+</div>
