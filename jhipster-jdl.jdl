@@ -1,0 +1,85 @@
+entity Units{
+	name String,
+    priority Integer
+}
+
+entity Doctors{
+	name String,
+    perferedDay String,
+    doubleShift Integer,
+    shiftType String,
+    perferedUnit String
+}
+
+entity DoctorsUnit{
+	dayValue Integer,
+    shiftType Integer,
+    activeWeek Integer,
+    donePass Integer,
+    passDate ZonedDateTime,
+    unitPassed Integer,
+    passBlocked Integer,
+    justView Integer
+}
+entity ExtraPassUnit{
+	dayValue Integer,
+    shiftType Integer,
+    activeWeek Integer,
+    donePass Integer,
+    passDate ZonedDateTime,
+    unitPassed Integer
+}
+entity UnitImgs{
+	fileDescription String,
+    img Clob
+}
+
+entity WeekDayDate{
+	dayValue Integer,
+    dayName String,
+    dayDate String
+}
+entity DoctorPassImgs{
+	dayValue Integer,
+    img Clob
+}
+entity Notifications{
+	title String,
+    message String,
+    status Integer,
+    dayValue Integer
+}
+
+relationship OneToOne {
+	DoctorPassImgs{unit} to Units
+}
+relationship OneToOne {
+	DoctorPassImgs{doctor} to Doctors
+}
+
+relationship OneToOne {
+	UnitImgs{unit} to Units
+}
+
+relationship OneToOne {
+	Notifications{unit} to Units
+}
+
+relationship OneToMany {
+	DoctorsUnit{doctor} to Doctors
+}
+relationship OneToMany {
+	DoctorsUnit{unit} to Units
+}
+relationship OneToMany {
+	ExtraPassUnit{doctor} to Doctors
+}
+relationship OneToMany {
+	ExtraPassUnit{unit} to Units
+}
+paginate * with pagination
+
+service all with serviceClass
+
+dto all with mapstruct
+
